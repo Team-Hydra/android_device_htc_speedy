@@ -43,7 +43,7 @@ BOARD_VENDOR_QCOM_AMSS_VERSION := 1200
 BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := speedy
 BOARD_VENDOR_QCOM_GPS_LOC_API_AMSS_VERSION := 50000
 
-BOARD_USES_HTC_GB_CAMERA := true
+#BOARD_USES_HTC_GB_CAMERA := true
 
 TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/usb_mass_storage/lun0/file
 
@@ -69,7 +69,7 @@ BOARD_FLASH_BLOCK_SIZE := 262144
 TARGET_KERNEL_SOURCE := kernel/htc/msm7x30
 TARGET_KERNEL_CONFIG := evervolv_speedy_defconfig
 BUILD_KERNEL := true
-LINARO_BUILD := true
+KERNEL_TOOLCHAIN_PREFIX:=$(ANDROID_BUILD_TOP)/prebuilts/gcc/linux-x86/arm/arm-linux-linaro-4.7/bin/arm-eabi-
 
 TARGET_RELEASETOOLS_EXTENSIONS := device/htc/common
 TARGET_PREBUILT_KERNEL := device/htc/speedy/prebuilt/root/kernel
