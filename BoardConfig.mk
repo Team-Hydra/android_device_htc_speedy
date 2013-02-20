@@ -31,6 +31,9 @@ USE_CAMERA_STUB := true
 # inherit from the proprietary version
 -include vendor/htc/speedy/BoardConfigVendor.mk
 
+# inherit wifi defines
+-include device/htc/msm7x30-common/bcm4329.mk
+
 BOARD_KERNEL_CMDLINE := no_console_suspend=1
 BOARD_KERNEL_BASE := 0x4000000
 BOARD_KERNEL_PAGE_SIZE := 4096
