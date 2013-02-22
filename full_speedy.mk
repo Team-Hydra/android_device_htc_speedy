@@ -96,8 +96,10 @@ PRODUCT_COPY_FILES += \
     device/htc/speedy/prebuilt/system/etc/vold.fstab:system/etc/vold.fstab \
     device/htc/speedy/prebuilt/system/etc/apns-conf.xml:system/etc/apns-conf.xml
 
-# Kernel modules
-#PRODUCT_COPY_FILES += \
+# Broadcom firmware
+PRODUCT_PACKAGES += \
+    fw_bcm4329.bin \
+    fw_bcm4329_apsta.bin
 
 ifeq ($(TARGET_PREBUILT_KERNEL),)
 LOCAL_KERNEL := device/htc/speedy/prebuilt/root/kernel
