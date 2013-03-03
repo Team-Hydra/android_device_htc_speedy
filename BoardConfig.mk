@@ -25,6 +25,10 @@
 # against the traditional rules of inheritance).
 USE_CAMERA_STUB := true
 
+# Legacy camera
+BOARD_USES_HTC_GB_CAMERA := true
+BOARD_USES_LEGACY_OVERLAY := true
+
 # inherit from common msm7x30
 -include device/htc/msm7x30-common/BoardConfigCommon.mk
 
@@ -45,9 +49,6 @@ BOARD_USE_NEW_LIBRIL_HTC := true
 BOARD_VENDOR_QCOM_AMSS_VERSION := 1200
 BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := speedy
 BOARD_VENDOR_QCOM_GPS_LOC_API_AMSS_VERSION := 50000
-
-BOARD_USES_HTC_GB_CAMERA := true
-BOARD_USES_LEGACY_OVERLAY := true
 
 TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/usb_mass_storage/lun0/file
 
