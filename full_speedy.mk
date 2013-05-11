@@ -25,6 +25,7 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_COPY_FILES += \
     device/htc/speedy/prebuilt/root/init.speedy.rc:root/init.speedy.rc \
+    device/htc/speedy/prebuilt/root/init.speedy.usb.rc:root/init.speedy.usb.rc \
     device/htc/speedy/prebuilt/root/ueventd.speedy.rc:root/ueventd.speedy.rc
 
 ## (2) Also get non-open-source GSM-specific aspects if available
@@ -45,19 +46,11 @@ DEVICE_PACKAGE_OVERLAYS += device/htc/speedy/overlay
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.telephony.cdma.xml:system/etc/permissions/android.hardware.telephony.cdma.xml
 
-# CameraHal
-PRODUCT_PACKAGES += \
-    camera.msm7x30
-
 # Misc
 PRODUCT_PACKAGES += \
     gps.speedy \
     sensors.speedy \
     lights.speedy
-
-# Temporary hack
-ADDITIONAL_DEFAULT_PROPERTIES += \
-    persist.service.adb.enable=1
 
 # Input config files
 PRODUCT_COPY_FILES += \
@@ -89,41 +82,15 @@ PRODUCT_COPY_FILES += \
     device/htc/speedy/prebuilt/system/etc/voPDLog.cfg:system/etc/voPDLog.cfg \
     device/htc/speedy/prebuilt/system/etc/voVidDec.dat:system/etc/voVidDec.dat
 
+# Wifi firmware
+$(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4329/device-bcm.mk)
+
 # speedy uses high-density artwork where available
 PRODUCT_LOCALES += en
 
 PRODUCT_COPY_FILES += \
     device/htc/speedy/prebuilt/system/etc/vold.fstab:system/etc/vold.fstab \
     device/htc/speedy/prebuilt/system/etc/apns-conf.xml:system/etc/apns-conf.xml
-
-# Broadcom firmware
-PRODUCT_PACKAGES += \
-    fw_bcm4329.bin \
-    fw_bcm4329_apsta.bin
-
-ifeq ($(TARGET_PREBUILT_KERNEL),)
-LOCAL_KERNEL := device/htc/speedy/prebuilt/root/kernel
-else
-LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
-endif
-
-PRODUCT_COPY_FILES += \
-    $(LOCAL_KERNEL):kernel
-
-PRODUCT_COPY_FILES += \
-    device/htc/speedy/prebuilt/system/lib/modules/bcm4329.ko:system/lib/modules/bcm4329.ko \
-    device/htc/speedy/prebuilt/system/lib/modules/sequans_sdio.ko:system/lib/modules/sequans_sdio.ko \
-    device/htc/speedy/prebuilt/system/lib/modules/auth_rpcgss.ko:system/lib/modules/auth_rpcgss.ko \
-    device/htc/speedy/prebuilt/system/lib/modules/cifs.ko:system/lib/modules/cifs.ko \
-    device/htc/speedy/prebuilt/system/lib/modules/lockd.ko:system/lib/modules/lockd.ko \
-    device/htc/speedy/prebuilt/system/lib/modules/nfs.ko:system/lib/modules/nfs.ko \
-    device/htc/speedy/prebuilt/system/lib/modules/rpcsec_gss_krb5.ko:system/lib/modules/rpcsec_gss_krb5.ko \
-    device/htc/speedy/prebuilt/system/lib/modules/sunrpc.ko:system/lib/modules/sunrpc.ko \
-    device/htc/speedy/prebuilt/system/lib/modules/wimaxdbg.ko:system/lib/modules/wimaxdbg.ko \
-    device/htc/speedy/prebuilt/system/lib/modules/wimaxuart.ko:system/lib/modules/wimaxuart.ko
-
-PRODUCT_COPY_FILES += \
-    device/htc/speedy/prebuilt/system/lib/libcryp98.so:system/lib/libcryp98.so
 
 $(call inherit-product-if-exists, vendor/htc/speedy/speedy-vendor.mk)
 
