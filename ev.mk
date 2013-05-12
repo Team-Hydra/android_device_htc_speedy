@@ -4,6 +4,9 @@ $(call inherit-product, device/htc/speedy/full_speedy.mk)
 # Inherit some common evervolv stuff.
 $(call inherit-product, vendor/ev/config/common_full_phone.mk)
 
+# Inherity wimax stuffs.
+$(call inherit-product, vendor/ev/config/wimax.mk)
+
 #
 # Setup device specific product configuration.
 #
@@ -19,9 +22,6 @@ PRODUCT_CODENAME := Artis
 PRODUCT_VERSION_DEVICE_SPECIFIC := p1
 
 PRODUCT_MOTD :="\n\n\n--------------------MESSAGE---------------------\nThank you for choosing Evervolv for your Evo Shift 4G\nPlease visit us at \#evervolv on irc.freenode.net\nFollow @preludedrew for the latest Evervolv updates\nGet the latest rom at evervolv.com\n------------------------------------------------\n"
-
-#PRODUCT_PACKAGES += \
-#    Camera
 
 # Hot reboot
 PRODUCT_PACKAGE_OVERLAYS += \
