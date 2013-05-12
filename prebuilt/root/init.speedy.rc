@@ -151,6 +151,9 @@ service htc_ebdlogd_rel /system/bin/htc_ebdlogd -s -k
         disabled
     oneshot
 
+service netmgrd /system/bin/netmgrd
+    class main
+
 service sequansd /system/bin/sequansd /etc/wimax/sequansd/sequansd_app.xml
     user root
     group root inet
