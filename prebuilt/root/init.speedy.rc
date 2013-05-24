@@ -9,17 +9,24 @@ on early-init
     symlink /storage/sdcard0 /sdcard
     symlink /storage/sdcard0 /mnt/sdcard
 
+    setprop ro.crypto.tmpfs_options size=128m,mode=0771,uid=1000,gid=1000
+    write /proc/sys/vm/min_free_kbytes 8192
+
 on early-fs
-    mkdir /system
-    mkdir /data 0771 system system
-    mkdir /cache 0770 system cache
     mkdir /devlog 0700 root root
 
-    mount ext4 /dev/block/mmcblk0p26 /system wait ro noatime nodiratime barrier=0 nouser_xattr
-    mount ext4 /dev/block/mmcblk0p27 /data wait noatime nodiratime nosuid nodev barrier=0 noauto_da_alloc nouser_xattr
-    mount ext4 /dev/block/mmcblk0p28 /cache wait noatime nodiratime nosuid nodev barrier=0 nouser_xattr
-    mount ext4 /dev/block/mmcblk0p31 /devlog wait noatime nodiratime nosuid nodev barrier=0 nouser_xattr
+on fs
+    mount_all /fstab.speedy
 
+on post-fs
+    chmod 0771 /cache
+    chown system cache /cache
+    chmod 0700 /devlog
+    chown root root /devlog
+    chmod 0771 /data
+    chown system system /data
+
+on post-fs-data
     #wifi
     mkdir /data/misc 1771 system misc
     mkdir /data/misc/wifi 0770 wifi wifi
@@ -33,6 +40,10 @@ on early-fs
     mkdir /data/wimax/ 0770  system system
     mkdir /data/wimax/log 0770  system system
 
+    # Set indication (checked by vold) that we have finished this action
+    setprop vold.post_fs_data_done 1
+
+on boot
     # bluetooth power up/down interface
     chown bluetooth bluetooth /sys/class/rfkill/rfkill0/type
     chown bluetooth bluetooth /sys/class/rfkill/rfkill0/state
