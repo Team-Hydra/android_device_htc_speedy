@@ -47,11 +47,9 @@ DEVICE_PACKAGE_OVERLAYS += device/htc/speedy/overlay
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.telephony.cdma.xml:system/etc/permissions/android.hardware.telephony.cdma.xml
 
-# Misc
+# GPS
 PRODUCT_PACKAGES += \
-    gps.speedy \
-    sensors.speedy \
-    lights.speedy
+    gps.speedy
 
 # Input config files
 PRODUCT_COPY_FILES += \
