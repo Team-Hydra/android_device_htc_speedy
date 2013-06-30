@@ -34,11 +34,11 @@ $(call inherit-product-if-exists, vendor/htc/speedy/speedy-vendor.mk)
 
 ## (3)  Finally, the least specific parts, i.e. the non-GSM-specific aspects
 PRODUCT_PROPERTY_OVERRIDES += \
-	ro.com.google.clientidbase=android-sprint-us \
-	ro.com.google.locationfeatures=1 \
-	ro.cdma.home.operator.numeric=310120 \
-	ro.cdma.home.operator.alpha=Sprint \
-	ro.setupwizard.enable_bypass=1 \
+    ro.com.google.clientidbase=android-sprint-us \
+    ro.com.google.locationfeatures=1 \
+    ro.cdma.home.operator.numeric=310120 \
+    ro.cdma.home.operator.alpha=Sprint \
+    ro.setupwizard.enable_bypass=1 \
     dalvik.vm.lockprof.threshold=500 \
     dalvik.vm.dexopt-flags=m=y
 
@@ -80,9 +80,6 @@ PRODUCT_COPY_FILES += \
     device/htc/speedy/prebuilt/system/etc/vommcodec.cfg:system/etc/vommcodec.cfg \
     device/htc/speedy/prebuilt/system/etc/voPDLog.cfg:system/etc/voPDLog.cfg \
     device/htc/speedy/prebuilt/system/etc/voVidDec.dat:system/etc/voVidDec.dat
-
-# Wifi firmware
-$(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4329/device-bcm.mk)
 
 # speedy uses high-density artwork where available
 PRODUCT_LOCALES += en

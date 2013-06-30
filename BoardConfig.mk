@@ -31,42 +31,20 @@ USE_CAMERA_STUB := true
 # inherit from the proprietary version
 -include vendor/htc/speedy/BoardConfigVendor.mk
 
-# inherit wifi defines
--include device/htc/msm7x30-common/bcmdhd.mk
+TARGET_BOOTLOADER_BOARD_NAME := speedy
 
 BOARD_KERNEL_CMDLINE := no_console_suspend=1
 BOARD_KERNEL_BASE := 0x4000000
 BOARD_KERNEL_PAGE_SIZE := 4096
-
-TARGET_BOOTLOADER_BOARD_NAME := speedy
+TARGET_KERNEL_CONFIG := evervolv_speedy_defconfig
 
 # Wimax
 COMMON_GLOBAL_CFLAGS += -DBOARD_HAVE_SQN_WIMAX
 BOARD_HAVE_SQN_WIMAX := true
 
-# Adreno
-BOARD_EGL_NEEDS_LEGACY_FB := false
-
-# Audio
-BOARD_USES_QCOM_AUDIO_VOIPMUTE := false
-BOARD_USES_QCOM_AUDIO_RESETALL := false
-
 BOARD_VENDOR_QCOM_AMSS_VERSION := 1200
 BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := speedy
 BOARD_VENDOR_QCOM_GPS_LOC_API_AMSS_VERSION := 50000
-
-# cat /proc/emmc
-#dev:        size     erasesize name
-#mmcblk0p17: 00040000 00000200 "misc"
-#mmcblk0p21: 0087f400 00000200 "recovery"
-#mmcblk0p22: 00400000 00000200 "boot"
-#mmcblk0p26: 1f7bf600 00000200 "system"
-#mmcblk0p28: 09a7fa00 00000200 "cache"
-#mmcblk0p27: 1bbffe00 00000200 "userdata"
-#mmcblk0p31: 01400200 00000200 "devlog"
-#mmcblk0p32: 00040000 00000200 "pdata"
-#mmcblk0p25: 00c00200 00000200 "wimax"
-#mmcblk0p30: 007ffa00 00000200 "udata_wimax"
 
 TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 435941376
@@ -74,18 +52,8 @@ BOARD_USERDATAIMAGE_PARTITION_SIZE := 1394606080
 BOARD_BOOTIMAGE_PARTITION_SIZE := 4194304
 BOARD_FLASH_BLOCK_SIZE := 262144
 
-TARGET_KERNEL_SOURCE := kernel/htc/msm7x30-3.0
-TARGET_KERNEL_CONFIG := evervolv_speedy_defconfig
-BUILD_KERNEL := true
-
-TARGET_RELEASETOOLS_EXTENSIONS := device/htc/common
-TARGET_PREBUILT_KERNEL := device/htc/speedy/prebuilt/root/kernel
-
 BOARD_SDCARD_DEVICE_PRIMARY := /dev/block/mmcblk1p1
 BOARD_SDCARD_DEVICE_SECONDARY := /dev/block/mmcblk1
 BOARD_SDEXT_DEVICE := /dev/block/mmcblk1p2
 BOARD_USES_MMCUTILS := true
 BOARD_HAS_NO_SELECT_BUTTON := 1
-
-BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
-TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/class/android_usb/android0/f_mass_storage/lun0/file
