@@ -44,6 +44,8 @@ on post-fs-data
     setprop vold.post_fs_data_done 1
 
 on boot
+    chmod 0644 /proc/cmdline
+
     # bluetooth power up/down interface
     chown bluetooth bluetooth /sys/class/rfkill/rfkill0/type
     chown bluetooth bluetooth /sys/class/rfkill/rfkill0/state
@@ -92,9 +94,6 @@ on boot
 on property:init.svc.wpa_supplicant=stopped
     stop dhcpcd
 
-on property:init.svc.p2p_supplicant=stopped
-    stop dhcpcd
-
 service wpa_supplicant /system/bin/wpa_supplicant \
     -Dnl80211 -iwlan0 -c/data/misc/wifi/wpa_supplicant.conf -e/data/misc/wifi/entropy.bin
     class late_start
@@ -119,11 +118,6 @@ service dhcpcd_wlan0 /system/bin/dhcpcd -ABKL
     disabled
     oneshot
 
-service dhcpcd_p2p /system/bin/dhcpcd -aABKL
-    class late_start
-    disabled
-    oneshot
-
 service dhcpWimax /system/bin/dhcpcd -ABKL -f /etc/wimax/dhcp/wimaxDhcp.conf  wimax0
     class main
     disabled
@@ -134,22 +128,11 @@ service iprenew_wlan0 /system/bin/dhcpcd -n
     disabled
     oneshot
 
-service iprenew_p2p /system/bin/dhcpcd -n
-    class late_start
-    disabled
-    oneshot
-
 # compass/accelerometer daemon
 service akmd /system/bin/akmd
     class main
     user compass
     group compass misc input
-
-# bugreport is triggered by the KEY_VOLUMEUP and BTN_MOUSE keycodes
-service bugreport /system/bin/dumpstate -d -v -o /sdcard/bugreports/bugreport
-    disabled
-    oneshot
-    keycodes 115 272
 
 service udhcpd /system/bin/udhcpd
     disabled
@@ -157,16 +140,6 @@ service udhcpd /system/bin/udhcpd
 
 service rmt_storage /system/bin/rmt_storage /dev/block/mmcblk0p13 /dev/block/mmcblk0p14
     user root
-
-service htc_ebdlogd /system/bin/htc_ebdlogd -s -k -P 7
-    user root
-        disabled
-    oneshot
-
-service htc_ebdlogd_rel /system/bin/htc_ebdlogd -s -k
-    user root
-        disabled
-    oneshot
 
 service sequansd /system/bin/sequansd /etc/wimax/sequansd/sequansd_app.xml
     user root
@@ -249,9 +222,3 @@ service dmagent /system/bin/dmagent -N -P19 -VSY
     socket dmagent stream 660 root radio
     user root
     group radio cache inet misc
-
-on property:ro.build.tags=test-keys
-    start htc_ebdlogd
-
-on property:ro.build.tags=release-keys
-    start htc_ebdlogd_rel
