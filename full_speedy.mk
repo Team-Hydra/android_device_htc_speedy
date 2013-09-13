@@ -40,7 +40,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.cdma.home.operator.alpha=Sprint \
     ro.setupwizard.enable_bypass=1 \
     dalvik.vm.lockprof.threshold=500 \
-    dalvik.vm.dexopt-flags=m=y
+    dalvik.vm.dexopt-flags=m=y \
+    ro.telephony.ril.v3=skipdatareg
 
 DEVICE_PACKAGE_OVERLAYS += device/htc/speedy/overlay
 
