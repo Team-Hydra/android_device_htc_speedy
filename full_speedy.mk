@@ -35,22 +35,18 @@ $(call inherit-product-if-exists, vendor/htc/speedy/speedy-vendor.mk)
 ## (3)  Finally, the least specific parts, i.e. the non-GSM-specific aspects
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.com.google.clientidbase=android-sprint-us \
-    ro.com.google.locationfeatures=1 \
     ro.cdma.home.operator.numeric=310120 \
     ro.cdma.home.operator.alpha=Sprint \
-    ro.setupwizard.enable_bypass=1 \
-    dalvik.vm.lockprof.threshold=500 \
-    dalvik.vm.dexopt-flags=m=y \
     ro.telephony.ril.v3=skipdatareg
 
 DEVICE_PACKAGE_OVERLAYS += device/htc/speedy/overlay
 
-PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.telephony.cdma.xml:system/etc/permissions/android.hardware.telephony.cdma.xml
-
 # GPS
 PRODUCT_PACKAGES += \
     gps.speedy
+
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.telephony.cdma.xml:system/etc/permissions/android.hardware.telephony.cdma.xml
 
 # Input config files
 PRODUCT_COPY_FILES += \
