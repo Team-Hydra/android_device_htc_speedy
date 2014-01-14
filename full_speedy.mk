@@ -81,9 +81,6 @@ PRODUCT_COPY_FILES += \
 # speedy uses high-density artwork where available
 PRODUCT_LOCALES += en
 
-PRODUCT_COPY_FILES += \
-    device/htc/speedy/prebuilt/system/etc/apns-conf.xml:system/etc/apns-conf.xml
-
 $(call inherit-product-if-exists, vendor/htc/speedy/speedy-vendor.mk)
 
 # media profiles and capabilities spec
